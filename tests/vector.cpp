@@ -44,3 +44,14 @@ TEST_CASE(" q1=q2"){
   q1.write(stream,q1.head_());
   REQUIRE(stream.str() == out);
   }
+TEST_CASE("copy queue_t"){
+ queue_t<int> q1;
+ q1.push(1);
+ q1.push(2);
+ q1.push(3);
+ queue_t<int> q2(q1);
+ std::string out{"1---2---3---"};
+ std::ostringstream stream;
+ q2.write(stream,q2.head_());
+ REQUIRE(stream.str() == out);
+}
