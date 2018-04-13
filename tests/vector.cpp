@@ -18,6 +18,7 @@ queue_t<int> q1;
   q1.write(stream,q1.head_());
   REQUIRE(stream.str() == out);
 }
-
-
+TEST_CASE("pop_back"){
+queue_t<int> q1;
+}
 
