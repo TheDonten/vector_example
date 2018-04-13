@@ -39,6 +39,16 @@ public:
     }
    return  *this;
 }
+    queue_t(queue_t const& other) : queue_t(){
+     
+     node_t* p = other.head;
+     while( p!= nullptr){
+         push(p->value);
+         p = p->next;
+           
+    }
+  
+}
     void push(T  value) {
         node_t* node = new node_t;
         node->value=value;
