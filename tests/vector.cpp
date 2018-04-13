@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-TEST_CASE("create queue_t){
+TEST_CASE("create queue_t"){
  queue_t<int> q1;
  REQUIRE(q1.head_() == nullptr);    
  REQUIRE(q1.tail_() == nullptr);
