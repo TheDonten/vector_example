@@ -54,7 +54,7 @@ public:
         }
     }
     T pop_back(){
-        if(head == nullptr) throw std::logic_error("head == nullptr);
+        if(head == nullptr) throw std::logic_error("head == nullptr");
         
         T value = head->value;
         node_t* node= head->next;
