@@ -67,7 +67,7 @@ void write(std::ostream & stream, node_t* head){
     node_t * p;
     p=head;
     while (p != NULL) {
-        stream<<p->value<<"   ";
+        stream<<p->value<<"---";
         p = p->next;
     }
 }
