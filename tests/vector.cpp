@@ -22,12 +22,12 @@ TEST_CASE("pop_back"){
 queue_t<int> q1;
 q1.push(1);
 q1.push(2);
-REQUIRE( q1.pop() == 1 );
-REQUIRE( q1.pop() == 2 );	
+REQUIRE( q1.pop_back() == 1 );
+REQUIRE( q1.pop_back() == 2 );	
 }
 TEST_CASE("error pop"){
  queue_t<int> q1;
- REQUIRE_THROWS_AS( queue.pop(), std::logic_error );
+ REQUIRE_THROWS_AS( q1.pop_back(), std::logic_error );
 }
 TEST_CASE(" q1=q2"){
   queue_t<int> q1;
