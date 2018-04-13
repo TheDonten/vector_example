@@ -19,6 +19,9 @@ public:
     node_t* head_() const{
         return head;
     }
+    node_t* tail_() const{
+        return tail;
+    }
     queue_t &operator =(queue_t const& other){
        if(other.head){
    node_t * node;
