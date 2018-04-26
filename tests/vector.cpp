@@ -12,7 +12,7 @@ TEST_CASE("copy"){
 shared_ptr<int> sp1(new int(6));
 shared_ptr<int> sp2(new int(7));
 REQUIRE(*sp1 == 6);
-REQUIRE(*sp1 == 7);
+REQUIRE(*sp2 == 7);
 }
 TEST_CASE("swap"){
 shared_ptr<int> sp1(new int(6));
