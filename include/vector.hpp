@@ -87,3 +87,4 @@ class shared_ptr {
     }
   }
 };
+typedef std::pair<int, int> Mypair;
