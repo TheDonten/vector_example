@@ -3,124 +3,31 @@
 
 #include "vector.hpp"
 
-TEST_CASE("creating vector")
-{
-	vector_t<int> vector;
-	REQUIRE( vector.size() == 0 );
-	REQUIRE( vector.capacity() == 0 );
+TEST_CASE("ptr == nullptr"){
+ shared_ptr<int> sp1;
+ REQUIRE (sp1.get() == nullptr);
+}	
+
+TEST_CASE("copy"){
+shared_ptr<int> sp1(new int(6));
+shared_ptr<int> sp2(new int(7));
+REQUIRE(*sp1 == 6);
+REQUIRE(*sp1 == 7);
 }
-
-TEST_CASE("copying vector")
-{
-	vector_t<int> vector;
-	vector.push_back(1);
-
-	vector_t<int> copy(vector);
-	REQUIRE( copy == vector );
+TEST_CASE("swap"){
+shared_ptr<int> sp1(new int(6));
+shared_ptr<int> sp2(new int(7));
+sp1.swap(sp2);
+REQUIRE(*sp1 == 7);
+REQUIRE(*sp2 == 6);		
 }
-
-TEST_CASE("assigning vector")
-{
-	vector_t<int> vector1;
-	vector_t<int> vector2;
-
-	vector1.push_back(1);
-	vector2.push_back(2);
-
-	vector1 = vector2;
-	REQUIRE( vector1 == vector2 );
+TEST_CASE("reset"){
+shared_ptr <int> sp1(new int(3));
+sp1.reset(new int(6));
+REQUIRE(*sp1 == 6);	
 }
-
-TEST_CASE("equaling vector")
-{
-	vector_t<int> vector1;
-	vector_t<int> vector2;
-
-	vector1.push_back(1);
-	vector2.push_back(1);
-
-	REQUIRE( vector1 == vector2 );
-
-	vector1.push_back(2);
-	REQUIRE( vector1 != vector2 );
-}
-
-TEST_CASE("indexing vector")
-{
-	vector_t<int> vector;
-
-	vector.push_back(1);
-
-	REQUIRE( vector[0] == 1 );
-
-	vector_t<int> const copy(vector);
-	REQUIRE( copy[0] == 1 );
-}
-
-TEST_CASE("pushing elements")
-{
-	vector_t<int> vector;
-
-	vector.push_back(1);
-	REQUIRE( vector.size() == 1 );
-	REQUIRE( vector.capacity() == 1 );
-
-	vector.push_back(2);
-	REQUIRE( vector.size() == 2 );
-	REQUIRE( vector.capacity() == 2 );
-
-	vector.push_back(3);
-	REQUIRE( vector.size() == 3 );
-	REQUIRE( vector.capacity() == 4 );
-
-	vector.push_back(4);
-	REQUIRE( vector.size() == 4 );
-	REQUIRE( vector.capacity() == 4 );
-
-	vector.push_back(5);
-	REQUIRE( vector.size() == 5 );
-	REQUIRE( vector.capacity() == 8 );
-}
-
-TEST_CASE("poping elements")
-{
-	vector_t<int> vector;
-
-	vector.push_back(1);
-	vector.push_back(2);
-	vector.push_back(3);
-	vector.push_back(4);
-	vector.push_back(5);
-	vector.push_back(6);
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 5 );
-	REQUIRE( vector.capacity() == 8 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 4 );
-	REQUIRE( vector.capacity() == 8 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 3 );
-	REQUIRE( vector.capacity() == 8 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 2 );
-	REQUIRE( vector.capacity() == 4 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 1 );
-	REQUIRE( vector.capacity() == 2 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 0 );
-	REQUIRE( vector.capacity() == 1 );
-}
-
-TEST_CASE("check leave massive"){
-       vector_t<int> vector;
-	vector.push_back(1);
-	vector.push_back(2);
-REQUIRE_THROWS_AS( vector.as(5), std::out_of_range);
+TEST_CASE("->number"){
+shared_ptr<Mypair> sp1(new Mypair(1, 2));
+REQUIRE(sp1->first == 1);
+REQUIRE(sp1->second == 2);	
 }
