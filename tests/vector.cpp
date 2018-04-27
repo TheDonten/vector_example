@@ -3,31 +3,56 @@
 
 #include "vector.hpp"
 
-TEST_CASE("ptr == nullptr"){
- shared_ptr<int> sp1;
- REQUIRE (sp1.get() == nullptr);
-}	
+TEST_CASE("ptr == nullptr") {
+  shared_ptr<int> sp1;
+  REQUIRE(sp1.get() == nullptr);
+}
 
-TEST_CASE("copy"){
-shared_ptr<int> sp1(new int(6));
-shared_ptr<int> sp2(new int(7));
-REQUIRE(*sp1 == 6);
-REQUIRE(*sp2 == 7);
+TEST_CASE("copy") {
+  shared_ptr<int> sp1(new int(6));
+  shared_ptr<int> sp2(new int(7));
+  REQUIRE(*sp1 == 6);
+  REQUIRE(*sp2 == 7);
 }
-TEST_CASE("swap"){
-shared_ptr<int> sp1(new int(6));
-shared_ptr<int> sp2(new int(7));
-sp1.swap(sp2);
-REQUIRE(*sp1 == 7);
-REQUIRE(*sp2 == 6);		
+TEST_CASE("copy =") {
+  shared_ptr<int> sp1(new int(3));
+  shared_ptr<int> sp2;
+  sp2 = sp1;
+  REQUIRE(*sp2 == 3);
 }
-TEST_CASE("reset"){
-shared_ptr <int> sp1(new int(3));
-sp1.reset(new int(6));
-REQUIRE(*sp1 == 6);	
+TEST_CASE("swap") {
+  shared_ptr<int> sp1(new int(6));
+  shared_ptr<int> sp2(new int(7));
+  sp1.swap(sp2);
+  REQUIRE(*sp1 == 7);
+  REQUIRE(*sp2 == 6);
 }
-TEST_CASE("->number"){
-shared_ptr<Mypair> sp1(new Mypair(1, 2));
-REQUIRE(sp1->first == 1);
-REQUIRE(sp1->second == 2);	
+TEST_CASE("reset") {
+  shared_ptr<int> sp1(new int(3));
+  sp1.reset(new int(6));
+  REQUIRE(*sp1 == 6);
+}
+TEST_CASE("->number") {
+  shared_ptr<Mypair> sp1(new Mypair(1, 2));
+  REQUIRE(sp1->first == 1);
+  REQUIRE(sp1->second == 2);
+}
+TEST_CASE("use count") {
+  shared_ptr<int> sp1(new int(3));
+  shared_ptr<int> sp2(sp1);
+  REQUIRE(sp2.use_count() == 2);
+}
+TEST_CASE("unique") {
+  shared_ptr<int> sp1(new int(3));
+  shared_ptr<int> sp2(new int(3));
+  shared_ptr<int> sp3(sp1);
+  REQUIRE(sp2.unique() == true);
+  REQUIRE(sp3.unique() == false);
+}
+TEST_CASE("before") {
+  shared_ptr<int> sp1(new int(3));
+  shared_ptr<int> sp3(new int(3));
+  shared_ptr<int> sp2(sp1);
+  REQUIRE(sp2.before(sp3) == true);
+  REQUIRE(sp3.before(sp2) == false);
 }
