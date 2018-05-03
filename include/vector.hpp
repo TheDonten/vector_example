@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 template <typename T>
 class shared_ptr {
  private:
@@ -66,8 +65,9 @@ class shared_ptr {
     }
   }
   void swap(shared_ptr<T>& other) {
-    std::swap(ptr_, other.ptr_);
-    std::swap(counter_, other.counter_);
+    using std::swap;
+    swap(ptr_, other.ptr_);
+    swap(counter_, other.counter_);
   }
 
   T& operator*() const { return *ptr_; }
